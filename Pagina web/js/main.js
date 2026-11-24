@@ -183,14 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Password toggle
+    // Password toggle
   const toggleBtn = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('loginPassword');
   if (toggleBtn && passwordInput) {
     toggleBtn.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
+      const estaOculta = passwordInput.type === 'password';
+      passwordInput.type = estaOculta ? 'text' : 'password';
+      toggleBtn.querySelector('.icon-show').toggleAttribute('hidden', estaOculta);
+      toggleBtn.querySelector('.icon-hide').toggleAttribute('hidden', !estaOculta);
+      toggleBtn.setAttribute('aria-label', estaOculta ? 'Ocultar contraseña' : 'Mostrar contraseña');
     });
   }
 
